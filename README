@@ -1,0 +1,24 @@
+oVirt Log4j Logger Extension
+============================
+
+This extension implements Log4j Logger to provide
+Log4j appenders for oVirt.
+
+CONFIGURATION
+-------------
+
+/etc/ovirt-enigne/extensions.d/Log4jLogger.properties
+
+ovirt.engine.extension.name = @NAME@
+ovirt.engine.extension.provides = org.ovirt.engine.api.extensions.logger.Logger
+ovirt.engine.extension.bindings.method = jbossmodule
+ovirt.engine.extension.binding.jbossmodule.module = org.ovirt.engine-extensions.logger.log4j
+ovirt.engine.extension.binding.jbossmodule.class = org.ovirt.engineextensions.logger.log4j.Log4jLogger
+log4j.rootLogger=DEBUG, myappender
+log4j.appender.myappender=org.apache.log4j.net.SyslogAppender
+log4j.appender.myappender.SyslogHost=localhost
+log4j.appender.myappender.layout=org.apache.log4j.PatternLayout
+log4j.appender.myappender.layout.ConversionPattern=WFA [%c] %m%n
+
+@NAME@
+    Extension instance name.

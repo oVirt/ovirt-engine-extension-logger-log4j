@@ -1,0 +1,66 @@
+%if 0%{?rhel}
+%if 0%{?centos}
+%global log4j log4j
+%else
+%global log4j log4j-aep6
+%endif
+%else
+%global log4j log4j
+%endif
+
+%global make_common_opts \\\
+	PREFIX=%{_prefix} \\\
+	SYSCONF_DIR=%{_sysconfdir} \\\
+	DATA_DIR=%{_datadir} \\\
+	PKG_DATA_DIR=%{_datadir}/%{name} \\\
+	%{nil}
+
+Name:		@PACKAGE_NAME@
+Version:	@RPM_VERSION@
+Release:	@RPM_RELEASE@%{?release_suffix}%{?dist}
+License:	ASL 2.0
+Summary:	oVirt Log4j Logger Extension
+Group:		Virtualization/Management
+URL:		http://www.ovirt.org
+BuildArch:	noarch
+Source:		http://resources.ovirt.org/pub/src/%{name}/%{name}-@PACKAGE_VERSION@.tar.gz
+
+BuildRequires:	%{log4j}
+BuildRequires:	ant
+BuildRequires:	java-1.7.0-openjdk-devel
+BuildRequires:	jpackage-utils
+BuildRequires:	ovirt-engine-extensions-api
+
+Requires:	%{log4j}
+Requires:	ovirt-engine >= 3.5
+
+%description
+Log4j logger extensions for oVirt engine.
+
+%prep
+%setup -c -q
+
+%build
+cat > build.properties << __EOF__
+package.display.name=%{name}-%{version}-%{release}
+jar.log4j=$(build-classpath %{log4j})
+jar.ovirt-engine-extensions-api=$(build-classpath ovirt-engine/ovirt-engine-extensions-api)
+__EOF__
+
+make %{make_common_opts} all
+
+%install
+rm -fr "%{buildroot}"
+make %{make_common_opts} install-no-build DESTDIR="%{buildroot}"
+
+rm "%{buildroot}/usr/share/ovirt-engine-extension-logger-log4j/modules/org/ovirt/engine-extensions/logger/log4j/main/log4j.jar"
+ln -s "$(build-classpath %{log4j})" "%{buildroot}/usr/share/ovirt-engine-extension-logger-log4j/modules/org/ovirt/engine-extensions/logger/log4j/main/log4j.jar"
+
+%files
+%doc README
+%{_datadir}/%{name}/
+%{_sysconfdir}/ovirt-engine/engine.conf.d/20-%{name}.conf
+
+%changelog
+* Fri May 9 2014 Ravi Nori <rnori@redhat.com> 0.0.0-1
+- Initial.

@@ -1,0 +1,6 @@
+lib/
+target/
+output/
+
+ovirt-engine-extension-logger-log4j.spec
+build.properties
