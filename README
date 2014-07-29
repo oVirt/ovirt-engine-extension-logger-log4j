@@ -7,7 +7,7 @@ Log4j appenders for oVirt.
 CONFIGURATION
 -------------
 
-/etc/ovirt-enigne/extensions.d/Log4jLogger.properties
+/etc/ovirt-engine/extensions.d/Log4jLogger.properties
 
 ovirt.engine.extension.name = @NAME@
 ovirt.engine.extension.provides = org.ovirt.engine.api.extensions.logger.Logger
