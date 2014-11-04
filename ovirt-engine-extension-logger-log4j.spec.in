@@ -1,10 +1,19 @@
 %if 0%{?rhel}
+%if 0%{?rhel} < 7
+%global java_devel java7-devel
 %if 0%{?centos}
 %global log4j log4j
 %else
 %global log4j log4j-eap6
 %endif
 %else
+%global java_devel java-devel >= 1.7.0
+%global log4j log4j
+%endif
+%endif
+
+%if 0%{?fedora}
+%global java_devel java-devel >= 1.7.0
 %global log4j log4j
 %endif
 
@@ -25,12 +34,7 @@ URL:		http://www.ovirt.org
 BuildArch:	noarch
 Source:		http://resources.ovirt.org/pub/src/%{name}/%{name}-@PACKAGE_VERSION@.tar.gz
 
-%if 0%{?rhel}
-BuildRequires:	java7-devel
-%endif
-%if 0%{?fedora}
-BuildRequires:	java-devel >= 1.7.0
-%endif
+BuildRequires:	%{java_devel}
 BuildRequires:	%{log4j}
 BuildRequires:	ant
 BuildRequires:	jpackage-utils
