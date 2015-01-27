@@ -10,11 +10,18 @@
 %global java_devel java-devel >= 1.7.0
 %global log4j log4j
 %endif
+%global log4j_jar %{log4j}/log4j.jar
 %endif
 
 %if 0%{?fedora}
 %global java_devel java-devel >= 1.7.0
+%if 0%{?fedora} < 21
 %global log4j log4j
+%global log4j_jar %{log4j}/log4j.jar
+%else
+%global log4j log4j12 >= 1.2.17-8
+%global log4j_jar log4j-1.jar
+%endif
 %endif
 
 %global make_common_opts \\\
@@ -52,7 +59,7 @@ Log4j logger extensions for oVirt engine.
 %build
 cat > build.properties << __EOF__
 package.display.name=%{name}-%{version}-%{release}
-jar.log4j=$(build-classpath %{log4j}/log4j.jar)
+jar.log4j=$(build-classpath %{log4j_jar})
 jar.ovirt-engine-extensions-api=$(build-classpath ovirt-engine/ovirt-engine-extensions-api)
 __EOF__
 
@@ -63,7 +70,7 @@ rm -fr "%{buildroot}"
 make %{make_common_opts} install-no-build DESTDIR="%{buildroot}"
 
 rm "%{buildroot}/usr/share/ovirt-engine-extension-logger-log4j/modules/org/ovirt/engine-extensions/logger/log4j/main/log4j.jar"
-ln -s "$(build-classpath %{log4j}/log4j.jar)" "%{buildroot}/usr/share/ovirt-engine-extension-logger-log4j/modules/org/ovirt/engine-extensions/logger/log4j/main/log4j.jar"
+ln -s "$(build-classpath %{log4j_jar})" "%{buildroot}/usr/share/ovirt-engine-extension-logger-log4j/modules/org/ovirt/engine-extensions/logger/log4j/main/log4j.jar"
 
 %files
 %doc README

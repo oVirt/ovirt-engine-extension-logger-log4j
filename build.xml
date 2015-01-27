@@ -92,7 +92,7 @@
 		/>
 		<copy
 			file="${jar.log4j}"
-			todir="${build.output}/modules/org/ovirt/engine-extensions/logger/log4j/main"
+			tofile="${build.output}/modules/org/ovirt/engine-extensions/logger/log4j/main/log4j.jar"
 		/>
 	</target>
 
