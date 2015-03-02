@@ -78,5 +78,8 @@ ln -s "$(build-classpath %{log4j_jar})" "%{buildroot}/usr/share/ovirt-engine-ext
 %{_sysconfdir}/ovirt-engine/engine.conf.d/20-%{name}.conf
 
 %changelog
+* Mon Mar 2 2015 Alon Bar-Lev <alonbl@redhat.com> 1.0.1-1
+- Initial.
+
 * Mon Dec 1 2014 Ravi Nori <rnori@redhat.com> 1.0.0-1
 - Initial.
