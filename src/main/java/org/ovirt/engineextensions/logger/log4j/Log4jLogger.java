@@ -83,7 +83,7 @@ public class Log4jLogger implements Extension {
                 "The oVirt Project"
         ).mput(
                 Base.ContextKeys.EXTENSION_NAME,
-                "Log4jLogger"
+                "ovirt-engine-extension-logger-log4j"
         ).mput(
                 Base.ContextKeys.LICENSE,
                 "ASL 2.0"
