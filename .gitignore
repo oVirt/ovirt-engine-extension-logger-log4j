@@ -4,3 +4,12 @@ output/
 
 ovirt-engine-extension-logger-log4j.spec
 build.properties
+
+*.tar.gz
+
+*.iml
+.idea
+
+.bash_history
+exported-artifacts
+mocker*.cfg
