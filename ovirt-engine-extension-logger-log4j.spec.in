@@ -78,6 +78,10 @@ ln -s "$(build-classpath %{log4j_jar})" "%{buildroot}/usr/share/ovirt-engine-ext
 %{_sysconfdir}/ovirt-engine/engine.conf.d/20-%{name}.conf
 
 %changelog
+* Fri Nov 23 2018 Martin Perina <mperina@redhat.com> 1.0.3-1
+- Fix Fedora build issues
+- Switch to oVirt STDCIv2
+
 * Mon Mar 2 2015 Alon Bar-Lev <alonbl@redhat.com> 1.0.1-1
 - Initial.
 
