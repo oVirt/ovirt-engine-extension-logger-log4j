@@ -1,6 +1,8 @@
-ant
-git
-java-1.8.0-openjdk-devel
-jpackage-utils
-ovirt-engine-extensions-api
 dnf-utils
+git
+java-11-openjdk-devel
+log4j12
+maven
+maven-local
+ovirt-engine-extensions-api
+sed

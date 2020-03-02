@@ -1,81 +1,69 @@
-%if 0%{?rhel}
-%if 0%{?rhel} < 7
-%global java_devel java7-devel
-%if 0%{?centos}
-%global log4j log4j
-%else
-%global log4j log4j-eap6
-%endif
-%else
-%global java_devel java-devel >= 1.7.0
-%global log4j log4j
-%endif
-%global log4j_jar %{log4j}/log4j.jar
-%endif
-
-%if 0%{?fedora}
-%global java_devel java-devel >= 1.7.0
-%if 0%{?fedora} < 21
-%global log4j log4j
-%global log4j_jar %{log4j}/log4j.jar
-%else
-%global log4j log4j12 >= 1.2.17-8
-%global log4j_jar log4j-1.jar
-%endif
-%endif
-
 %global make_common_opts \\\
 	PREFIX=%{_prefix} \\\
 	SYSCONF_DIR=%{_sysconfdir} \\\
-	DATA_DIR=%{_datadir} \\\
-	PKG_DATA_DIR=%{_datadir}/%{name} \\\
+	DATAROOT_DIR=%{_datadir} \\\
+	DESTDIR=%{buildroot} \\\
+	PACKAGE_VERSION=%{version} \\\
+	PACKAGE_DISPLAY_NAME=%{name}-%{version}-@RELEASE@ \\\
 	%{nil}
 
-Name:		@PACKAGE_NAME@
-Version:	@RPM_VERSION@
-Release:	@RPM_RELEASE@%{?release_suffix}%{?dist}
-License:	ASL 2.0
+Name:		ovirt-engine-extension-logger-log4j
+Version:	@VERSION@
+Release:	@RELEASE@%{?dist}
 Summary:	oVirt Log4j Logger Extension
-Group:		Virtualization/Management
+Group:		%{ovirt_product_group}
+License:	ASL 2.0
 URL:		http://www.ovirt.org
+Source:		%{name}-%{version}.tar.gz
+
+# We need to disable automatic generation of "Requires: java-headless >= 1:11"
+# by xmvn, becase JDK 11 doesn't provide java-headless artifact, but it
+# provides java-11-headless.
+AutoReq:	no
+
 BuildArch:	noarch
-Source:		http://resources.ovirt.org/pub/src/%{name}/%{name}-@PACKAGE_VERSION@.tar.gz
 
-BuildRequires:	%{java_devel}
-BuildRequires:	%{log4j}
-BuildRequires:	ant
-BuildRequires:	jpackage-utils
-BuildRequires:	ovirt-engine-extensions-api
+BuildRequires:	java-11-openjdk-devel
+BuildRequires:	maven-local
+BuildRequires:	mvn(org.apache.maven.plugins:maven-compiler-plugin)
+BuildRequires:	mvn(org.apache.maven.plugins:maven-source-plugin)
 
-Requires:	%{log4j}
-Requires:	ovirt-engine >= 3.5
+BuildRequires:	mvn(log4j:log4j:1.2.17)
+BuildRequires:	mvn(org.ovirt.engine.api:ovirt-engine-extensions-api)
+
+
+Requires:	java-11-openjdk-headless >= 1:11.0.0
+Requires:	javapackages-filesystem
+Requires:	ovirt-engine-extensions-api
+Requires:	log4j12
 
 %description
-Log4j logger extensions for oVirt engine.
+This package contains the oVirt Engine Logger Log4j extensions to forward oVirt
+engine logs to remote syslog service.
 
 %prep
 %setup -c -q
 
 %build
-cat > build.properties << __EOF__
-package.display.name=%{name}-%{version}-%{release}
-jar.log4j=$(build-classpath %{log4j_jar})
-jar.ovirt-engine-extensions-api=$(build-classpath ovirt-engine/ovirt-engine-extensions-api)
-__EOF__
+# Necessary to override the default for xmvn, which is JDK 8
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
 
-make %{make_common_opts} all
+make %{make_common_opts} generate-files
+%mvn_build -j
 
 %install
-rm -fr "%{buildroot}"
-make %{make_common_opts} install-no-build DESTDIR="%{buildroot}"
+make %{make_common_opts} install
+%mvn_install
 
-rm "%{buildroot}/usr/share/ovirt-engine-extension-logger-log4j/modules/org/ovirt/engine-extensions/logger/log4j/main/log4j.jar"
-ln -s "$(build-classpath %{log4j_jar})" "%{buildroot}/usr/share/ovirt-engine-extension-logger-log4j/modules/org/ovirt/engine-extensions/logger/log4j/main/log4j.jar"
 
-%files
-%doc README
-%{_datadir}/%{name}/
-%{_sysconfdir}/ovirt-engine/engine.conf.d/20-%{name}.conf
+%files -f .mfiles
+%dir %{_javadir}/%{name}
+%dir %{_datadir}/%{name}
+%doc README*
+%{_datadir}/%{name}/examples/
+%{_datadir}/%{name}/modules/
+%{_sysconfdir}/ovirt-engine/engine.conf.d/50-ovirt-engine-extension-logger-log4j.conf
+
 
 %changelog
 * Fri Nov 23 2018 Martin Perina <mperina@redhat.com> 1.0.3-1

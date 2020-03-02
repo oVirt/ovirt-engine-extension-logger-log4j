@@ -1,24 +1,27 @@
 oVirt Log4j Logger Extension
 ============================
 
-This extension implements Log4j Logger to provide
-Log4j appenders for oVirt.
+This extension implements Log4j Logger to provide Log4j appenders for oVirt,
+for example it's possible to pass log recors from oVirt engine to remote
+syslog service.
 
 CONFIGURATION
 -------------
 
-/etc/ovirt-engine/extensions.d/Log4jLogger.properties
+Copy configuration file from /usr/share/ovirt-engine-extension-logger-log4j/examples/Log4jLogger.properties
+to /etc/ovirt-engine/extensions.d/Log4jLogger.properties and replace
+'localhost' with proper FQDN or IP address of the host where your syslog
+service is running. For example if your syslog service is running on
+syslog.example.com, you need to update below line
 
-ovirt.engine.extension.name = @NAME@
-ovirt.engine.extension.provides = org.ovirt.engine.api.extensions.logger.Logger
-ovirt.engine.extension.bindings.method = jbossmodule
-ovirt.engine.extension.binding.jbossmodule.module = org.ovirt.engine-extensions.logger.log4j
-ovirt.engine.extension.binding.jbossmodule.class = org.ovirt.engineextensions.logger.log4j.Log4jLogger
-log4j.rootLogger=DEBUG, myappender
-log4j.appender.myappender=org.apache.log4j.net.SyslogAppender
-log4j.appender.myappender.SyslogHost=localhost
-log4j.appender.myappender.layout=org.apache.log4j.PatternLayout
-log4j.appender.myappender.layout.ConversionPattern=[%c] %m%n
+  log4j.appender.myappender.SyslogHost=localhost
 
-@NAME@
-    Extension instance name.
+to
+
+  log4j.appender.myappender.SyslogHost=syslog.example.com
+
+After updating /etc/ovirt-engine/extensions.d/Log4jLogger.properties file
+you need to restart ovirt-engine service to apply the update:
+
+  systemctl restart ovirt-engine
+
