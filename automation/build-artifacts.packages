@@ -3,5 +3,4 @@ git
 java-1.8.0-openjdk-devel
 jpackage-utils
 ovirt-engine-extensions-api
-unboundid-ldapsdk
 dnf-utils
