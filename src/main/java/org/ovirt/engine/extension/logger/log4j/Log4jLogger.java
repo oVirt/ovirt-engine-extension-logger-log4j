@@ -14,7 +14,7 @@
  *     limitations under the License.
  *
  */
-package org.ovirt.engineextensions.logger.log4j;
+package org.ovirt.engine.extension.logger.log4j;
 
 import org.ovirt.engine.api.extensions.Base;
 import org.ovirt.engine.api.extensions.ExtMap;

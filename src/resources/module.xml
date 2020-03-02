@@ -1,9 +1,0 @@
-<module xmlns="urn:jboss:module:1.1" name="org.ovirt.engine-extensions.logger.log4j">
-	<resources>
-		<resource-root path="ovirt-engine-extension-logger-log4j.jar"/>
-		<resource-root path="log4j.jar"/>
-	</resources>
-	<dependencies>
-                <module name="org.ovirt.engine.api.ovirt-engine-extensions-api"/>
-        </dependencies>
-</module>
