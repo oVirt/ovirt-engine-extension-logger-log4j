@@ -66,6 +66,12 @@ make %{make_common_opts} install
 
 
 %changelog
+* Wed Mar 25 2020 Martin Perina <mperina@redhat.com> 1.1.0-1
+- Moved java classes under org.ovirt.engine.extension.logger.log4j package
+- Switch to maven build
+- Require OpenJDK 11
+- Release the project for EL8 only
+
 * Fri Nov 23 2018 Martin Perina <mperina@redhat.com> 1.0.3-1
 - Fix Fedora build issues
 - Switch to oVirt STDCIv2
