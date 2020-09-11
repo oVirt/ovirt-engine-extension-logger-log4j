@@ -66,6 +66,9 @@ make %{make_common_opts} install
 
 
 %changelog
+* Fri Sep 11 2020 Martin Perina <mperina@redhat.com> 1.1.1-1
+- Fixed link to log4j library included in logger-lo4j module
+
 * Wed Mar 25 2020 Martin Perina <mperina@redhat.com> 1.1.0-1
 - Moved java classes under org.ovirt.engine.extension.logger.log4j package
 - Switch to maven build
