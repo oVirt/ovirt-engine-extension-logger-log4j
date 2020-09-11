@@ -126,7 +126,7 @@ install-layout: \
 		install-packaging-files \
 		$(NULL)
 	ln -sf "$(JAVA_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).jar" "$(DESTDIR)$(DATA_DIR)/modules/org/ovirt/engine/extension/logger/log4j/main/$(PACKAGE_NAME).jar"
-	ln -sf "$(JAVA_DIR)/log4j.jar" "$(DESTDIR)$(DATA_DIR)/modules/org/ovirt/engine/extension/logger/log4j/main/log4j.jar"
+	ln -sf "$(JAVA_DIR)/log4j-1.jar" "$(DESTDIR)$(DATA_DIR)/modules/org/ovirt/engine/extension/logger/log4j/main/log4j.jar"
 
 
 install-artifacts: \
