@@ -120,7 +120,7 @@ install-packaging-files:
 	done
 	install -d -m 755 "$(DESTDIR)$(DOC_DIR)"
 	install -d -m 755 "$(DESTDIR)$(DOC_DIR)/$(PACKAGE_NAME)"
-	install -m 644 README "$(DESTDIR)$(DOC_DIR)/$(PACKAGE_NAME)/README"
+	install -m 644 README.md "$(DESTDIR)$(DOC_DIR)/$(PACKAGE_NAME)/README.md"
 
 install-layout: \
 		install-packaging-files \
