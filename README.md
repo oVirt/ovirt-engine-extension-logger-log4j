@@ -1,6 +1,8 @@
 oVirt Log4j Logger Extension
 ============================
 
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/ovirt/ovirt-master-snapshot/package/ovirt-engine-extension-logger-log4j/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/ovirt/ovirt-master-snapshot/package/ovirt-engine-extension-logger-log4j/)
+
 This extension implements Log4j Logger to provide Log4j appenders for oVirt,
 for example it's possible to pass log recors from oVirt engine to remote
 syslog service.
