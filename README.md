@@ -2,7 +2,7 @@
 
 [![Copr build status](https://copr.fedorainfracloud.org/coprs/ovirt/ovirt-master-snapshot/package/ovirt-engine-extension-logger-log4j/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/ovirt/ovirt-master-snapshot/package/ovirt-engine-extension-logger-log4j/)
 
-Welcome to the oVirt engine extensions API source repository.
+Welcome to the oVirt Engine Extension Logger Log4j source repository.
 This repository is hosted on [GitHub:ovirt-engine-extension-logger-log4j](https://github.com/oVirt/ovirt-engine-extension-logger-log4j)
 
 This repository contains the extension which allow to pass oVirt Engine log records to appender provided by log4j, for example syslog.
@@ -44,7 +44,7 @@ Please submit patches to [GitHub:ovirt-engine-extension-logger-log4j](https://gi
  If you are not familiar with the process, you can read about [collaborating with pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests) on the GitHub website.
 
 ### Found a bug or documentation issue?
-To submit a bug or suggest an enhancement for oVirt Engine Extensions API please use
+To submit a bug or suggest an enhancement for oVirt Engine Extension Logger Log4j please use
 [oVirt Bugzilla for ovirt-engine-extension-logger-log4j product](https://bugzilla.redhat.com/enter_bug.cgi?product=ovirt-engine-extension-logger-log4j).
 
 If you don't have a Bugzilla account, you can still report [issues](https://github.com/oVirt/ovirt-engine-extension-logger-log4j/issues).
