@@ -1,5 +1,12 @@
 # oVirt Engine Logger Log4j Extension
 
+
+> IMPORTANT: This project has been dropped from oVirt starting with oVirt 4.4.10 release.
+> See [BZ#2044277](https://bugzilla.redhat.com/show_bug.cgi?id=2044277).
+>
+> Keeping the following section only for reference.
+
+
 [![Copr build status](https://copr.fedorainfracloud.org/coprs/ovirt/ovirt-master-snapshot/package/ovirt-engine-extension-logger-log4j/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/ovirt/ovirt-master-snapshot/package/ovirt-engine-extension-logger-log4j/)
 
 Welcome to the oVirt Engine Extension Logger Log4j source repository.
